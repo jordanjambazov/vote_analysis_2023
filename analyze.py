@@ -33,12 +33,14 @@ for file_path in glob.glob('raw/1_*_ik.html'):
     i6_invalid_bulletins = extract_row_value(content, "6. Брой на намерените в избирателните кутии недействителни гласове (бюлетини)")
 
     invalid_ratio = i6_invalid_bulletins / i5_found_bulletins
+    activity_ratio = i5_found_bulletins / i1_voters_in_lists_count
 
     vote_regions[vote_region]["vote_region_name"] = vote_region_name
     vote_regions[vote_region]["i1_voters_in_lists_count"] = i1_voters_in_lists_count
     vote_regions[vote_region]["i5_found_bulletins"] = i5_found_bulletins
     vote_regions[vote_region]["i6_invalid_bulletins"] = i6_invalid_bulletins
     vote_regions[vote_region]["invalid_ratio"] = invalid_ratio
+    vote_regions[vote_region]["activity_ratio"] = activity_ratio
 
 sorted_regions = sorted(
     vote_regions.values(),
@@ -46,4 +48,11 @@ sorted_regions = sorted(
 )
 for region in sorted_regions:
     invalid_percentage = round(region["invalid_ratio"] * 100, 2)
-    print(region["vote_region_name"] + "," + str(invalid_percentage))
+    activity_percentage = round(region["activity_ratio"] * 100, 2)
+    print(
+        "| " +
+        region["vote_region_name"].ljust(50) + " | " +
+        str(region["i1_voters_in_lists_count"]).ljust(25) + " | " +
+        str(activity_percentage).ljust(25) + " | " +
+        str(invalid_percentage).ljust(25) + " | "
+    )
