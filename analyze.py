@@ -53,6 +53,7 @@ for region in sorted_regions:
         "| " +
         region["vote_region_name"].ljust(50) + " | " +
         str(region["i1_voters_in_lists_count"]).ljust(25) + " | " +
+        str(region["i6_invalid_bulletins"]).ljust(25) + " | " +
         str(activity_percentage).ljust(25) + " | " +
         str(invalid_percentage).ljust(25) + " | "
     )
