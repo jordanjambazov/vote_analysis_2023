@@ -21,7 +21,7 @@ def convert_to_int(text):
     return int(cleaned_text)
 
 vote_regions = defaultdict(dict)
-
+total = 0
 for file_path in glob.glob('raw/1_*_ik.html'):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -41,6 +41,7 @@ for file_path in glob.glob('raw/1_*_ik.html'):
     vote_regions[vote_region]["i6_invalid_bulletins"] = i6_invalid_bulletins
     vote_regions[vote_region]["invalid_ratio"] = invalid_ratio
     vote_regions[vote_region]["activity_ratio"] = activity_ratio
+    total += i6_invalid_bulletins
 
 sorted_regions = sorted(
     vote_regions.values(),
